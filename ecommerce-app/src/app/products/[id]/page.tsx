@@ -2,6 +2,7 @@ import {prisma} from "../../../../lib/prisma"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import Image from "next/image"
+import AddToCartButton from "../../components/AddToCartButton"
 
 interface ProductPageProps {
     params: Promise<{id:string}>
@@ -75,12 +76,15 @@ export default async function ProductPage({params}:ProductPageProps){
             <p className="text-gray-700 leading-relaxed">{product.description}</p>
           </div>
 
-          <button 
-            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={product.stock === 0}
-          >
-            {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
-          </button>
+         <AddToCartButton
+            productId={product.id}
+            name={product.name}
+            price={product.price}
+            image={product.images[0] || '/images/placeholder.jpg'}
+            stock={product.stock}
+            fullWidth
+          />
+
         </div>
       </div>
     </div>
