@@ -1,7 +1,12 @@
 // app/components/Navbar.tsx
+'use client'
+
 import Link from 'next/link';
+import { useCartStore } from '../../../lib/store/cartStore';
 
 export default function Navbar() {
+  const totalItems = useCartStore((state) => state.getTotalItems());
+
   return (
     <nav className="bg-white shadow-sm border-b">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -13,8 +18,13 @@ export default function Navbar() {
           <Link href="/products" className="text-gray-700 hover:text-blue-600 transition">
             Products
           </Link>
-          <Link href="/cart" className="text-gray-700 hover:text-blue-600 transition">
-            Cart (0)
+          <Link href="/cart" className="text-gray-700 hover:text-blue-600 transition relative">
+            Cart
+            {totalItems > 0 && (
+              <span className="absolute -top-2 -right-4 bg-blue-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {totalItems}
+              </span>
+            )}
           </Link>
           <Link 
             href="/login" 
