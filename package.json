@@ -38,5 +38,21 @@
     "tailwindcss": "^4",
     "tsx": "^4.23.12",
     "typescript": "^5"
-  }
+  },
+  "description": "an e commerce project with nextJS",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damoon1379/e-commerce.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/damoon1379/e-commerce/issues"
+  },
+  "homepage": "https://github.com/damoon1379/e-commerce#readme"
 }
