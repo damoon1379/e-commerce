@@ -3,8 +3,10 @@
 
 import Link from 'next/link';
 import { useTotalItems } from '../../../lib/store/cartStore';
+import {useSession, signOut} from "next-auth/react"
 
 export default function Navbar() {
+  const {data:session} = useSession()
   const totalItems = useTotalItems();
 
   return (
@@ -26,12 +28,29 @@ export default function Navbar() {
               </span>
             )}
           </Link>
+
+          { session? (
+            <div className="flex items-center gap-4">
+              <span className="text-sm text-gray-700">
+                Hello, {session.user?.name || 'User'}
+              </span>
+              <button
+                onClick={() => signOut({ callbackUrl: '/' })}
+                className="text-red-600 hover:text-red-800 transition text-sm"
+              >
+                Sign Out
+              </button>
+            </div>
+          )
+          :(
           <Link 
             href="/login" 
             className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
           >
             Sign In
           </Link>
+          )}
+
         </div>
       </div>
     </nav>
