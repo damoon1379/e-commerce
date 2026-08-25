@@ -2,7 +2,7 @@
 'use client'
 
 import Link from 'next/link';
-import { useCartStore, useTotalItems } from '../../../lib/store/cartStore';
+import { useTotalItems } from '../../../lib/store/cartStore';
 
 export default function Navbar() {
   const totalItems = useTotalItems();
