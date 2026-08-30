@@ -2,6 +2,7 @@
 
 import {useState,useEffect} from "react"
 import {useSearchParams, useRouter} from "next/navigation"
+import { useCartStore } from "../../../../lib/store/cartStore"
 import Link from "next/link"
 
 interface OrderDetails {
@@ -16,6 +17,7 @@ export default function PaymentSuccessPage(){
     const searchParams = useSearchParams()
     const sessionId = searchParams.get('session_id')
     const orderId = searchParams.get("order_id")
+    const clearCart = useCartStore(state=>state.clearCart)
 
     const [loading,setLoading] = useState(true)
     const [error,setError] = useState('')
@@ -37,6 +39,7 @@ export default function PaymentSuccessPage(){
                     return
                 }
                 setOrder(data.order)
+                clearCart()
 
             }catch(err){
                 setError("Something went wrong")
