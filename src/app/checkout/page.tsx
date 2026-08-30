@@ -55,9 +55,8 @@ export default function CheckoutPage(){
     );
   }
 
-  const handleSubmit = async(e:React.SubmitEvent<HTMLFormElement>)=>{
-    e.preventDefault()
-    console.log("submitted")
+  const handleCheckout = async()=>{
+    
     setLoading(true)
     setError("")
 
@@ -68,7 +67,7 @@ export default function CheckoutPage(){
             body:JSON.stringify({
                 items,
                 total,
-                shippingInfo
+                //shippingInfo
             })
         })
 
@@ -89,103 +88,17 @@ export default function CheckoutPage(){
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Checkout</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center">Checkout</h1>
       
-      <div className="grid md:grid-cols-3 gap-8">
-        {/* Shipping Form */}
-        <div className="md:col-span-2">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">Shipping Information</h2>
-            
+      <div>
             {error && (
               <div className="bg-red-50 text-red-600 p-3 rounded-lg mb-4 text-sm">
                 {error}
               </div>
             )}
-
-            <form onSubmit={handleSubmit} className="space-y-4" id="checkout-form">
+      </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  value={shippingInfo.fullName}
-                  onChange={(e) => setShippingInfo({ ...shippingInfo, fullName: e.target.value })}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Address
-                </label>
-                <input
-                  type="text"
-                  value={shippingInfo.address}
-                  onChange={(e) => setShippingInfo({ ...shippingInfo, address: e.target.value })}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    City
-                  </label>
-                  <input
-                    type="text"
-                    value={shippingInfo.city}
-                    onChange={(e) => setShippingInfo({ ...shippingInfo, city: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    State/Province
-                  </label>
-                  <input
-                    type="text"
-                    value={shippingInfo.state}
-                    onChange={(e) => setShippingInfo({ ...shippingInfo, state: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Zip Code
-                  </label>
-                  <input
-                    type="text"
-                    value={shippingInfo.zipCode}
-                    onChange={(e) => setShippingInfo({ ...shippingInfo, zipCode: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Country
-                  </label>
-                  <input
-                    type="text"
-                    value={shippingInfo.country}
-                    onChange={(e) => setShippingInfo({ ...shippingInfo, country: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+      
 
         {/* Order Summary */}
         <div className="md:col-span-1">
@@ -219,8 +132,7 @@ export default function CheckoutPage(){
             </div>
 
             <button
-              type="submit"
-              form="checkout-form"
+              onClick={handleCheckout}
               disabled={loading}
               className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition mt-4 font-semibold disabled:opacity-50"
             >

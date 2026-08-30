@@ -97,14 +97,16 @@ export default function CartPage(){
                 </div>
               </div>
             </div>
-
-            <button
-              onClick={() => alert('Checkout coming soon!')}
-              className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition mt-4 font-semibold"
+         
+         <div className="flex my-3 items-center ">
+            <Link
+              href="/checkout"
+              className="w-full bg-blue-600 text-center text-white px-3 py-3 my-3 rounded-lg hover:bg-blue-700 transition mt-4 font-semibold"
             >
               Proceed to Checkout
-            </button>
-            
+            </Link>
+         </div>
+
             <button
               onClick={clearCart}
               className="w-full text-red-600 hover:text-red-800 transition text-sm mt-2"
