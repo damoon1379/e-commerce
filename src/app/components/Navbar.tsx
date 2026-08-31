@@ -30,6 +30,13 @@ export default function Navbar() {
           </Link>
 
           { session? (
+            <>
+             <Link 
+                                href="/orders" 
+                                className="text-gray-700 hover:text-blue-600 transition"
+                            >
+                                Orders
+                            </Link>
             <div className="flex items-center gap-4">
               <span className="text-sm text-gray-700">
                 Hello, {session.user?.name || 'User'}
@@ -41,6 +48,7 @@ export default function Navbar() {
                 Sign Out
               </button>
             </div>
+            </>
           )
           :(
           <Link 
