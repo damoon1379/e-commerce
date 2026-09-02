@@ -1,6 +1,8 @@
 import "dotenv/config"
 import {PrismaPg} from "@prisma/adapter-pg"
-import {PrismaClient} from "../src/generated/prisma/client"
+import {PrismaClient,Role} from "../src/generated/prisma/client"
+import bcrypt from "bcryptjs"
+
 const prisma = new PrismaClient({adapter:new PrismaPg({connectionString:process.env.DATABASE_URL})})
 
 
@@ -15,7 +17,16 @@ async function main() {
   await prisma.product.deleteMany();
   await prisma.user.deleteMany();
 
+  // Create admin user
+
+  const admin = {
+    name:'alireza',
+    email:'alireza@gmail.com',
+    password: await bcrypt.hash('123456',10),
+    role:Role.ADMIN,
+  }
   
+  await prisma.user.create({data:admin})
   // Create sample products
   const products = [
     {

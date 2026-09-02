@@ -38,9 +38,19 @@ export default function Navbar() {
                                 Orders
                             </Link>
             <div className="flex items-center gap-4">
+              {session.user?.role === 'ADMIN' ? 
+              <div className='flex justify-between items-center gap-4'>
+              <span className='text-sm text-gray-700 justify-items text-center'>Hello, Admin {session.user?.name || 'User'}</span>
+              <Link  href='/admin'
+               className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+              >
+                Admin dashboard
+              </Link>
+              </div> :
               <span className="text-sm text-gray-700">
                 Hello, {session.user?.name || 'User'}
               </span>
+              }
               <button
                 onClick={() => signOut({ callbackUrl: '/' })}
                 className="text-red-600 hover:text-red-800 transition text-sm"

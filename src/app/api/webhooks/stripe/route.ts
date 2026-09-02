@@ -35,8 +35,7 @@ let event : Stripe.Event
             const metadata = session.metadata
             const userId = metadata?.userId
             const orderId = metadata?.orderId
-console.log("user id from webhook metadata:",userId)
-console.log("order id from webhook metadata:",orderId)
+
 
             if(!userId || !orderId){
                 console.error("missing metadata", {userId,orderId})
